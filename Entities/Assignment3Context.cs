@@ -32,9 +32,9 @@ public partial class Assignment3Context : DbContext
     public virtual DbSet<Stock> Stocks { get; set; }
 
     public virtual DbSet<Store> Stores { get; set; }
+    public DbSet<Carrier> Carriers => Set<Carrier>();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Assignment3;Username=postgres\n;Password=postgres");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -293,6 +293,46 @@ public partial class Assignment3Context : DbContext
             entity.Property(e => e.Street)
                 .HasMaxLength(100)
                 .HasColumnName("street");
+        });
+
+        modelBuilder.Entity<Carrier>(entity =>
+        {
+            entity.HasKey(e => e.CarrierId).HasName("carriers_pkey");
+
+            entity.ToTable("carriers");
+            entity.Property(e => e.CarrierName)
+                .HasMaxLength(50)
+                .HasColumnName("carrier_name");
+
+            entity.Property(e => e.ContactUrl)
+                .HasMaxLength(50)
+                .HasColumnName("contact_url");
+
+            entity.Property(e => e.ContactPhone)
+                .HasMaxLength(50)
+                .HasColumnName("contact_phone");
+
+            entity.HasMany(c => c.Orders)
+                .WithOne(o => o.Carrier)
+                .HasForeignKey(o => o.CarrierId)
+                .OnDelete(DeleteBehavior.SetNull); // If carrier is deleted -> order reference is set to null
+        });
+
+        modelBuilder.Entity<Order>(entity =>
+        {
+        // Key, columns, etc.
+        // entity.HasKey(o => o.OrderId);
+
+        // For the order tracking fields:
+        entity.Property(o => o.TrackingNumber)
+                .HasColumnName("tracking_number")
+                .HasMaxLength(50);
+
+        entity.Property(o => o.ShippedDate)
+                .HasColumnName("shipped_date");
+
+        entity.Property(o => o.DeliveredDate)
+                .HasColumnName("delivered_date");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -24,4 +24,10 @@ public partial class Order
     public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
     public virtual Address ShippingAddress { get; set; } = null!;
+
+    public int? CarrierId { get; set; }
+    public string? TrackingNumber { get; set; }
+    public DateTime? ShippedDate { get; set; }
+    public DateTime? DeliveredDate { get; set; }
+    public Carrier? Carrier { get; set; }
 }

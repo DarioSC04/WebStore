@@ -116,3 +116,4 @@ C:\Users\I589037\Downloads\DatabaseDemo-main\DatabaseDemo-main\WebStore\obj\Debu
 C:\Users\I589037\Downloads\DatabaseDemo-main\DatabaseDemo-main\WebStore\obj\Debug\net8.0\WebStore.pdb
 C:\Users\I589037\Downloads\DatabaseDemo-main\DatabaseDemo-main\WebStore\obj\Debug\net8.0\WebStore.genruntimeconfig.cache
 C:\Users\I589037\Downloads\DatabaseDemo-main\DatabaseDemo-main\WebStore\obj\Debug\net8.0\ref\WebStore.dll
+C:\Users\I589037\Downloads\DatabaseDemo-main\DatabaseDemo-main\WebStore\obj\Debug\net8.0\WebStore.sourcelink.json
